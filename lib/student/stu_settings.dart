@@ -2,6 +2,7 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
 import 'package:virtulab/change_password.dart';
+import 'package:virtulab/instructor/inst_settings.dart';
 
 import '../contact_support.dart';
 import '../functions/auth.dart';
@@ -22,6 +23,7 @@ class _StudentSettings extends State<StudentSettings> {
   Query _studentInfo;
   initState() {
     super.initState();
+    getUserName();
     _studentInfo = firebaseref
         .child('student')
         .orderByChild('email')
@@ -92,7 +94,7 @@ class _StudentSettings extends State<StudentSettings> {
                           width: 10,
                         ),
                         Text(
-                          getUserFullName().toString(),//profile['fname'] + ' ' + profile['lname'],//"Maitha",
+                          name1 + " " + name2,//profile['fname'] + ' ' + profile['lname'],//"Maitha",
                           style: TextStyle(fontSize: 20),
                         ),
                       ],

@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:path/path.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:virtulab/instructor/inst_course_select.dart';
+import 'package:virtulab/instructor/inst_settings.dart';
 import 'package:virtulab/student/stu_caseStudies_list.dart';
 import 'package:virtulab/student/stu_course_contents.dart';
 import 'package:virtulab/student/stu_experiments_list.dart';
@@ -43,6 +44,7 @@ class _VirtuLabState extends State<VirtuLab> {
     // TODO: implement initState
     super.initState();
     userCheck();
+    getUserName();
   }
   @override
   Widget build(BuildContext context) {

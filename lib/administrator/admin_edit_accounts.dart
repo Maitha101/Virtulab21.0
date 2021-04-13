@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:virtulab/functions/auth.dart';
 import 'package:virtulab/functions/database.dart';
+import 'package:virtulab/instructor/inst_settings.dart';
 import 'package:virtulab/widgets/custom_text.dart';
 
 class AdminEditAccounts extends StatelessWidget {
@@ -20,7 +22,7 @@ class AdminEditAccounts extends StatelessWidget {
       floatingActionButton: FloatingActionButton.extended(
         icon: Icon(Icons.add),
         onPressed: (){
-          print(auth.currentUser.uid);
+          print(getUserName());
         },
         backgroundColor: Colors.amber,
         label: CustomText(text: "Add Student",color: Colors.white,),

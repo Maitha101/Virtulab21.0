@@ -94,6 +94,7 @@ class _AdminCourses extends State<AdminCourses> {
                       Animation<double> animation, int index) {
                     Map coursesAdmin = snapshot.value;
                     coursesAdmin['key'] = snapshot.key;
+
                     return _buildCourses(course: coursesAdmin);
                   }),
             )

@@ -1,6 +1,9 @@
+import 'dart:async';
+
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:virtulab/change_password.dart';
+import 'package:virtulab/instructor/inst_settings.dart';
 import '../functions/auth.dart';
 import '../main.dart';
 import 'adminNavBar.dart';
@@ -20,6 +23,8 @@ class _AdminSettings extends State<AdminSettings> {
   Query _adminInfo;
   initState() {
     super.initState();
+
+      getUserName();
     // _adminInfo =
     //     firebaseref.child('admin').child(_studID).orderByChild(_studID);
   }
@@ -74,7 +79,7 @@ class _AdminSettings extends State<AdminSettings> {
                           width: 10,
                         ),
                         Text(
-                          "Maitha",
+                          name1 +" "+ name2,
                           style: TextStyle(fontSize: 20),
                         ),
                       ],

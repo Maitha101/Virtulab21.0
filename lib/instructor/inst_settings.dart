@@ -2,9 +2,12 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:virtulab/change_password.dart';
 import 'package:virtulab/contact_support.dart';
+import 'package:virtulab/functions/database.dart';
 
 import '../functions/auth.dart';
 import '../main.dart';
+String name1;
+String name2;
 
 class InstSettings extends StatefulWidget {
   @override
@@ -16,13 +19,16 @@ class InstSettings extends StatefulWidget {
 class _InstSettings extends State<InstSettings> {
   // String _studID = currentUser();
   Query _instInfo;
+
   initState() {
     super.initState();
+    getUserName();
     // _instInfo =
     //     firebaseref.child('instructor').child(_studID).orderByChild(_studID);
   }
 
   bool isSwitched = false;
+
   @override
   Widget build(BuildContext context) {
     // return
@@ -66,7 +72,7 @@ class _InstSettings extends State<InstSettings> {
                     height: 10,
                   ),
                   Container(
-                      // margin: EdgeInsets.all(value),
+                    // margin: EdgeInsets.all(value),
                       clipBehavior: Clip.antiAlias,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(50)),
@@ -76,11 +82,11 @@ class _InstSettings extends State<InstSettings> {
                         Icons.account_circle_sharp,
                         size: 100,
                       )
-                      // Image.asset(
-                      //   "assets/images/profile_pic.png",
-                      //   fit: BoxFit.fill,
-                      // ),
-                      ),
+                    // Image.asset(
+                    //   "assets/images/profile_pic.png",
+                    //   fit: BoxFit.fill,
+                    // ),
+                  ),
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 5),
                     child: Row(
@@ -94,7 +100,7 @@ class _InstSettings extends State<InstSettings> {
                           width: 10,
                         ),
                         Text(
-                          "Maitha",
+                          name1 + " " + name2,
                           style: TextStyle(fontSize: 20),
                         ),
                       ],
@@ -268,5 +274,50 @@ class _InstSettings extends State<InstSettings> {
         ),
       ),
     );
+  }
+}
+
+   getUserName()  async {
+  final user = auth.currentUser.displayName;
+   Map name ;
+   String firstName;
+  if (user.length == 4) {
+     await  firebaseref.reference().child('admin').child(user)
+        .once()
+        .then((DataSnapshot snapshot) =>
+    {
+           name =  snapshot.value,
+    });
+   print(name);
+   name1 = name['fname'];
+   name2 = name['lname'];
+    return  name1;
+  }
+  else if(user.length ==6){
+    await  firebaseref.reference().child('instructor').child(user)
+        .once()
+        .then((DataSnapshot snapshot) =>
+    {
+      name =  snapshot.value,
+    });
+    name1 = name['fname'];
+    name2 = name['lname'];
+
+    return  name1;
+  }
+  else if(user.length ==10){
+    await  firebaseref.reference().child('student').child(user)
+        .once()
+        .then((DataSnapshot snapshot) =>
+    {
+      name =  snapshot.value,
+    });
+    name1 = name['fname'];
+    name2 = name['lname'];
+
+    return  name1;
+  }
+  else{
+    return "User";
   }
 }
